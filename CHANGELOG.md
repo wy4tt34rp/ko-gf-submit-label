@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (2026-10-08)
+
+- Add the form ID 1 shortcode example to the plugin description and readme.
+- No functional changes.
+
 ## 1.0.1 (2026-10-08)
 
 - Correct the plugin display name to `KO: Gravity Forms Submit Label`.
