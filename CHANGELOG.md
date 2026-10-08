@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1 (2026-10-08)
+
+- Correct the plugin display name to `KO: Gravity Forms Submit Label`.
+- No functional changes.
+
 ## 1.0.0 (2026-10-08)
 
 - Add `submit_text` to standard Gravity Forms form shortcodes.

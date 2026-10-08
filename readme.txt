@@ -1,10 +1,10 @@
-=== KO Gravity Forms Submit Label ===
+=== KO: Gravity Forms Submit Label ===
 Contributors: ko
 Tags: gravity forms, shortcode, submit button
 Requires at least: 6.7
 Requires PHP: 7.4
 Requires Plugins: gravityforms
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ Isolated automated checks use actual WordPress 6.7.4 and 7.1.3 HTML parsing, san
 The Gravity Forms hook flow was inspected in a local 2.10.3 source snapshot. Current native button markup is covered with fixtures. No installed site version, browser submission, CAPTCHA, payment flow, add-on integration or live AJAX request has been verified. Complete those applicable checks after installation in a testing environment.
 
 == Changelog ==
+
+= 1.0.1 =
+* Correct the plugin display name to KO: Gravity Forms Submit Label.
 
 = 1.0.0 =
 * Initial release of the embed-specific submit_text shortcode attribute.

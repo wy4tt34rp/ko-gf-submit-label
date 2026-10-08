@@ -1,6 +1,6 @@
-# KO Gravity Forms Submit Label
+# KO: Gravity Forms Submit Label
 
-Version 1.0.0. Author: KO, <mailto:ko@velaagency.com>.
+Version 1.0.1. Author: KO, <mailto:ko@velaagency.com>.
 
 ```text
 [gravityform id="9" title="false" description="false" ajax="true" submit_text="Send Request"]

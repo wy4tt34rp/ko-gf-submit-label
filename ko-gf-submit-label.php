@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: KO Gravity Forms Submit Label
+ * Plugin Name: KO: Gravity Forms Submit Label
  * Description: Adds an embed-specific submit_text attribute to the Gravity Forms shortcode.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: KO
  * Author URI: mailto:ko@velaagency.com
  * Requires at least: 6.7
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'KO_GF_SUBMIT_LABEL_VERSION', '1.0.0' );
+define( 'KO_GF_SUBMIT_LABEL_VERSION', '1.0.1' );
 
 // Fail harmlessly if an older WordPress installation bypasses the requirement.
 if ( ! method_exists( 'WP_HTML_Tag_Processor', 'set_modifiable_text' ) ) {
