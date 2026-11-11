@@ -121,6 +121,20 @@ $_POST = array( KO_GF_Submit_Label::FIELD => token( $a ) );
 $confirmation = array( 'form' => array( 'id' => 9 ), 'confirmation_markup' => fixture( 12 ), 'is_valid' => true );
 check( apply_filters( 'gform_ajax_submission_result', $confirmation ) === $confirmation, 'AJAX confirmation and chained forms untouched.' );
 
+// Legacy iframe responses must retain the same authenticated embed state.
+$_POST = array( 'gform_submit' => 9, KO_GF_Submit_Label::FIELD => token( $a ) );
+$iframe = apply_filters( 'gform_ajax_iframe_content', fixture() );
+check( value( $iframe ) === 'Send Request', 'Legacy iframe validation keeps the label.' );
+check( token( $iframe ) === token( $a ), 'Legacy retries keep the signed transport.' );
+check( apply_filters( 'gform_ajax_iframe_content', fixture( 12 ) ) === fixture( 12 ), 'Legacy other forms are unchanged.' );
+check( apply_filters( 'gform_ajax_iframe_content', '<div>Confirmed</div>' ) === '<div>Confirmed</div>', 'Legacy confirmation is unchanged.' );
+foreach ( array( '', token( $a ) . 'tampered', array( 'bad' ), token( render_label( 'Other', null, 12 ) ) ) as $bad ) {
+	$_POST = array( 'gform_submit' => 9, KO_GF_Submit_Label::FIELD => $bad );
+	check( apply_filters( 'gform_ajax_iframe_content', fixture() ) === fixture(), 'Legacy invalid or other-form token is ignored.' );
+}
+$_POST = array();
+check( apply_filters( 'gform_ajax_iframe_content', fixture() ) === fixture(), 'Legacy unlabeled response is unchanged.' );
+
 // Exercise the real WordPress shortcode parser and original GF hook contract.
 add_shortcode( 'gravityform', static function ( $attributes ) {
 	$id = (int) ( $attributes['id'] ?? 9 );

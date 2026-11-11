@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3 (2026-11-04)
+
+- Preserve signed embed-specific submit labels in legacy iframe AJAX validation responses.
+- Leave shared form settings, confirmation output and unlabeled forms unchanged.
+
 ## 1.0.2 (2026-10-08)
 
 - Add the form ID 1 shortcode example to the plugin description and readme.

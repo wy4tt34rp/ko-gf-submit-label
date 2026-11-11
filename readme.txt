@@ -4,7 +4,7 @@ Tags: gravity forms, shortcode, submit button
 Requires at least: 6.7
 Requires PHP: 7.4
 Requires Plugins: gravityforms
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,7 +39,7 @@ No. Removing submit_text or deactivating this plugin restores normal Gravity For
 
 = Does AJAX work? =
 
-Postback and legacy iframe AJAX render through the original shortcode again. For the newer Gravity Forms AJAX method introduced in 2.9, a signed hidden input carries the embed label and the plugin updates only the matching submission response's form or page markup. Validation data and confirmation responses are unchanged. No frontend JavaScript is added.
+Full-page postbacks render through the original shortcode again. For legacy iframe AJAX and the newer Gravity Forms AJAX method introduced in 2.9, a signed hidden input carries the embed label and the plugin updates only the matching submission response markup. Validation data and confirmation responses are unchanged. No frontend JavaScript is added.
 
 The signed value is cosmetic state, not an authorization token. It has no expiry so cached forms continue to work. Rotating WordPress salts requires clearing cached pages to regenerate it. Third-party rendering that bypasses the standard shortcode and AJAX result hooks is outside this integration.
 
@@ -56,6 +56,9 @@ Isolated automated checks use actual WordPress 6.7.4 and 7.1.3 HTML parsing, san
 The Gravity Forms hook flow was inspected in a local 2.10.3 source snapshot. Current native button markup is covered with fixtures. No installed site version, browser submission, CAPTCHA, payment flow, add-on integration or live AJAX request has been verified. Complete those applicable checks after installation in a testing environment.
 
 == Changelog ==
+
+= 1.0.3 =
+* Preserve signed embed-specific labels in legacy iframe AJAX validation responses.
 
 = 1.0.2 =
 * Add the form ID 1 shortcode example to the plugin description and readme.

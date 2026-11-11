@@ -2,7 +2,7 @@
 /**
  * Plugin Name: KO: Gravity Forms Submit Label
  * Description: Adds an embed-specific submit_text attribute to the Gravity Forms shortcode. Example: [gravityform id="1" title="false" description="false" ajax="true" submit_text="Send Request"]
- * Version: 1.0.2
+ * Version: 1.0.3
  * Author: KO
  * Author URI: mailto:ko@velaagency.com
  * Requires at least: 6.7
@@ -14,7 +14,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'KO_GF_SUBMIT_LABEL_VERSION', '1.0.2' );
+define( 'KO_GF_SUBMIT_LABEL_VERSION', '1.0.3' );
 
 // Fail harmlessly if an older WordPress installation bypasses the requirement.
 if ( ! method_exists( 'WP_HTML_Tag_Processor', 'set_modifiable_text' ) ) {
@@ -29,6 +29,21 @@ final class KO_GF_Submit_Label {
 	public static function init() {
 		add_filter( 'gform_shortcode_form', array( __CLASS__, 'shortcode' ), 20, 2 );
 		add_filter( 'gform_ajax_submission_result', array( __CLASS__, 'ajax_result' ), 20 );
+		add_filter( 'gform_ajax_iframe_content', array( __CLASS__, 'iframe_result' ), 20 );
+	}
+
+	/** Legacy iframe AJAX also bypasses the original shortcode output. */
+	public static function iframe_result( $html ) {
+		if ( ! is_string( $html ) ) {
+			return $html;
+		}
+		// This signed cosmetic token applies only to the submitted form response.
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$id = isset( $_POST['gform_submit'] ) && is_scalar( $_POST['gform_submit'] ) ? absint( $_POST['gform_submit'] ) : 0;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$token = isset( $_POST[ self::FIELD ] ) && is_string( $_POST[ self::FIELD ] ) ? wp_unslash( $_POST[ self::FIELD ] ) : '';
+		$label = $id ? self::verify( $token, $id ) : '';
+		return '' === $label ? $html : KO_GF_Submit_Label_Markup::rewrite( $html, $id, $label, $token );
 	}
 
 	/** Modify the completed shortcode output, never the shared form object. */
